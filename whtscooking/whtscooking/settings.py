@@ -57,7 +57,7 @@ ROOT_URLCONF = 'whtscooking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR + '/whtscooking/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

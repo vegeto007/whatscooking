@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+from management.views import Home
+
+urlpatterns = [	
+		url(r'^$', Home.as_view(), name='static-home'),
+		url(r'^admin/', include(admin.site.urls)),
 ]
