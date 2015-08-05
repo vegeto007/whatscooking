@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vendor, VendorMenu, Rating
+from .models import Vendor, VendorMenu, UserRating
 
 # Register your models here.
 
@@ -13,15 +13,15 @@ class VendorAdmin(admin.ModelAdmin):
 class VendorMenuAdmin(admin.ModelAdmin):
 
     model = VendorMenu
-    list_display = ('item_id', 'vendor_id', 'item_name', 'description')
+    list_display = ('item_id', 'vendor_id', 'item_name', 'price', 'description')
 
 
-class RatingAdmin(admin.ModelAdmin):
+class UserRatingAdmin(admin.ModelAdmin):
 
-    model = Rating
+    model = UserRating
     list_display = ('md5', 'vendor_id', 'rating')
 
 admin.site.register(Vendor, VendorAdmin)
 admin.site.register(VendorMenu, VendorMenuAdmin)
-admin.site.register(Rating, RatingAdmin)
+admin.site.register(UserRating, UserRatingAdmin)
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count
 from model_utils.models import TimeStampedModel
 from model_utils import Choices
 
@@ -15,12 +16,13 @@ class VendorMenu(TimeStampedModel):
     vendor_id = models.ForeignKey(Vendor, verbose_name="Vendor ID")
     item_name = models.CharField(max_length=30, verbose_name="Item ID")
     description = models.TextField(verbose_name="Description")
+    price = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True, verbose_name="Price")
 
     class Meta:
         unique_together = ('item_id', 'vendor_id')
 
 
-class Rating(TimeStampedModel):
+class UserRating(TimeStampedModel):
     md5 = models.CharField(max_length=50, verbose_name="md5", primary_key=True)
     vendor_id = models.ForeignKey(Vendor, verbose_name="Vendor ID")
     rating_type = Choices(('1', 'Good'),
@@ -30,4 +32,7 @@ class Rating(TimeStampedModel):
                               max_length=10,
                               verbose_name='Rating')
 
+    # @classmethod
+    # def get_rating_round_by_rating(self, rating_id):
+    #     return self.objects.aggregate(count=Count()).filter(rating=rating_id)
 
