@@ -7,7 +7,7 @@ from .models import UserRating
 
 
 class Home(TemplateView):
-    template_name = "home.html"
+    template_name = "index.html"
 
 
 class UserRatings(FormView):
