@@ -10,6 +10,9 @@ class Vendor(TimeStampedModel):
     id = models.CharField(max_length=10, verbose_name="Vendor ID", primary_key=True)
     name = models.CharField(max_length=30, verbose_name="Vendor Name")
 
+    def __unicode__(self):
+        return u'%s' % self.name
+
 
 class VendorMenu(TimeStampedModel):
     item_id = models.CharField(max_length=10, verbose_name="Item ID")
