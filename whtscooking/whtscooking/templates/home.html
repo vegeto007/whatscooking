@@ -1,5 +1,5 @@
 {# Load the tag library #}
-{% load bootstrap3 %}
+{% load bootstrap %}
 
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
@@ -13,5 +13,5 @@
 
 {% block body %}
     This is <em>bootstrap3</em> for <strong>Django</strong>.
-    {{ form }}
+    {{ form|bootstrap_horizontal }}
 {% endblock %}
