@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{# Load the tag library #}
+{% load bootstrap %}
+
+{% block body %}
+    {{ form|bootstrap_horizontal:'col-lg-6' }}
+{#    <form class="form-horizontal">#}
+{#        {% for field in form %}#}
+{#            <div class="form-group">#}
+{#                <div class="form-inline">#}
+{#                  {{field}}#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </form>#}
+{% endblock %}

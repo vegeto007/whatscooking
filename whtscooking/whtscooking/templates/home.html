@@ -1,13 +1,10 @@
+{% extends 'base.html' %}
+
 {# Load the tag library #}
 {% load bootstrap %}
 
-{# Load CSS and JavaScript #}
-
-
-
-{% block title %}django-bootstrap3{% endblock %}
-
 {% block body %}
-    This is <em>bootstrap3</em> for <strong>Django</strong>.
-    {{ form|bootstrap_horizontal }}
+    {% for vendor in vendors %}
+        {{ vendor }}
+    {% endfor %}
 {% endblock %}

@@ -9,6 +9,10 @@ from .models import UserRating, Vendor, VendorMenu
 class Home(TemplateView):
     template_name = "index.html"
 
+
+class Vendors(TemplateView):
+    template_name = "home.html"
+
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
         vendor_dict = {}
@@ -19,7 +23,7 @@ class Home(TemplateView):
 
 
 class UserRatings(FormView):
-    template_name = "home.html"
+    template_name = "user_rating.html"
     form_class = FormUserRatings
     success_url = '/rating/'
 
