@@ -22,7 +22,6 @@ class Vendors(FormView):
         context = super(Vendors, self).get_context_data(**kwargs)
         context['vendormenu'] = self.request.session.pop('vendormenu', {})
         context['vendor'] = self.request.session.pop('vendor', '')
-        # import pdb; pdb.set_trace()
 
         return context
 
@@ -57,8 +56,10 @@ class UserRatings(FormView):
         rating_id = self.request.POST['rating']
         user_agent = self.request.META['HTTP_USER_AGENT']
         remote_ip = self.request.META.get('REMOTE_ADDR')
+
         # user_hash = hashlib.sha1(remote_ip + user_agent).hexdigest()
         user_hash = hashlib.sha1(str(datetime.datetime.now())).hexdigest()
+
         try:
             vendor = Vendor.objects.get(id=vendor_id)
             user_rate, created = UserRating.objects.get_or_create(
