@@ -1,6 +1,6 @@
 import hashlib
 import copy
-
+import datetime
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
@@ -21,8 +21,6 @@ class Vendors(FormView):
     def get_context_data(self, **kwargs):
         context = super(Vendors, self).get_context_data(**kwargs)
         context['vendormenu'] = self.request.session.get('vendormenu', {})
-        # import pdb; pdb.set_trace()
-
         return context
 
     def form_valid(self, form):
@@ -54,8 +52,9 @@ class UserRatings(FormView):
         rating_id = self.request.POST['rating']
         user_agent = self.request.META['HTTP_USER_AGENT']
         remote_ip = self.request.META.get('REMOTE_ADDR')
-        user_hash = hashlib.sha1(remote_ip + user_agent).hexdigest()
-        import pdb; pdb.set_trace()
+        #user_hash = hashlib.sha1(remote_ip + user_agent).hexdigest()
+        user_hash = str(datetime.datetime.now())
+
         try:
             vendor = Vendor.objects.get(id=vendor_id)
             user_rate, created = UserRating.objects.get_or_create(
