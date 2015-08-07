@@ -34,8 +34,5 @@ class UserRating(TimeStampedModel):
     rating = models.CharField(choices=rating_type,
                               max_length=10,
                               verbose_name='Rating')
-
-    # @classmethod
-    # def get_rating_round_by_rating(self, rating_id):
-    #     return self.objects.aggregate(count=Count()).filter(rating=rating_id)
-
+    why = models.CharField(max_length=255, blank=True, null=True)
+    imp = models.CharField(max_length=255, blank=True, null=True)
