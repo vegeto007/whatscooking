@@ -27,12 +27,13 @@ class VendorMenu(TimeStampedModel):
 
 class UserRating(TimeStampedModel):
     md5 = models.CharField(max_length=50, verbose_name="md5", primary_key=True)
-    vendor_id = models.ForeignKey(Vendor, verbose_name="Vendor ID")
+    vendor_id = models.ForeignKey(Vendor, verbose_name="Vendor ID", blank=True, null=True)
     rating_type = Choices(('2', 'Like'),
                           ('3', 'Super Like'),
                           ('1', 'Not Like'), )
     rating = models.CharField(choices=rating_type,
                               max_length=10,
-                              verbose_name='Rating')
+                              verbose_name='Rating',
+                              blank=True, null=True)
     why = models.CharField(max_length=255, blank=True, null=True)
     imp = models.CharField(max_length=255, blank=True, null=True)
