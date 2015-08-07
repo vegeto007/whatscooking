@@ -100,15 +100,15 @@
                             <div class="progress">
                               <div class="progress-bar progress-bar-success" style="width:{% widthratio user_rating.rating_super_like 15 100 %}%">
                                 <span class="sr-only">{% widthratio user_rating.rating_super_like 40 100 %}% Complete (super_like)</span>
-                                  Super Like {{rating_super_like}}%
+                                  Super Like {% widthratio user_rating.rating_super_like 40 100 %}%
                               </div>
                               <div class="progress-bar progress-bar-warning progress-bar-striped" style="width:{% widthratio user_rating.rating_like 15 100 %}%">
                                 <span class="sr-only">{% widthratio user_rating.rating_super_like 40 100 %}% Complete (like)</span>
-                                  Like {{rating_like}}%
+                                  Like {% widthratio user_rating.rating_like 15 100 %}%
                               </div>
                               <div class="progress-bar progress-bar-danger" style="width:{% widthratio user_rating.rating_not_like 15 100 %}%">
                                 <span class="sr-only">{% widthratio user_rating.rating_super_like 40 100 %}% Complete (not_like)</span>
-                                  Not Like {{rating_not_like}}%
+                                  Not Like {% widthratio user_rating.rating_not_like 40 100 %}%
                               </div>
                             </div>
                         <br/>
