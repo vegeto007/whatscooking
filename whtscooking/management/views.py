@@ -78,15 +78,15 @@ class UserRatings(FormView):
                                   'rating_like': 0,
                                   'rating_not_like': 0}
         for vendor in Vendor.objects.all():
-            user_rating_dict[vendor.name] = copy.copy(user_rating_inner_dict)
+            user_rating_dict.update({vendor.name:copy.copy(user_rating_inner_dict)})
 
         for vendor in Vendor.objects.all():
             for user_rating in UserRating.objects.all():
-                if user_rating.rating == '1':
+                if user_rating.rating == '1' and vendor.id == user_rating.vendor_id_id:
                     user_rating_dict[vendor.name]['rating_super_like'] += 1
-                elif user_rating.rating == '2':
+                elif user_rating.rating == '2' and vendor.id == user_rating.vendor_id_id:
                     user_rating_dict[vendor.name]['rating_like'] += 1
-                elif user_rating.rating == '3':
+                elif user_rating.rating == '3' and vendor.id == user_rating.vendor_id_id:
                     user_rating_dict[vendor.name]['rating_not_like'] += 1
 
         return user_rating_dict
