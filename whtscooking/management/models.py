@@ -17,9 +17,9 @@ class Vendor(TimeStampedModel):
 class VendorMenu(TimeStampedModel):
     item_id = models.CharField(max_length=10, verbose_name="Item ID")
     vendor_id = models.ForeignKey(Vendor, verbose_name="Vendor ID")
-    item_name = models.CharField(max_length=30, verbose_name="Item ID")
+    item_name = models.CharField(max_length=30, verbose_name="Item Name")
     description = models.TextField(verbose_name="Description")
-    price = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True, verbose_name="Price")
+    price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Price")
 
     class Meta:
         unique_together = ('item_id', 'vendor_id')
