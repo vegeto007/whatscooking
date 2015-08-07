@@ -21,7 +21,7 @@ class Vendors(FormView):
     def get_context_data(self, **kwargs):
         context = super(Vendors, self).get_context_data(**kwargs)
         context['vendormenu'] = self.request.session.get('vendormenu', {})
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
 
         return context
 
@@ -31,7 +31,7 @@ class Vendors(FormView):
         for vendormenu in VendorMenu.objects.filter(vendor_id=vendor_id):
             vendormenu_dict[vendormenu.item_name] = vendormenu.description
         #context['vendormenu'] = vendormenu_dict
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         self.request.session['vendormenu'] = vendormenu_dict
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
