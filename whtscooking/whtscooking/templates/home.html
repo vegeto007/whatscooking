@@ -3,8 +3,18 @@
 {# Load the tag library #}
 {% load bootstrap %}
 
+
 {% block body %}
-    {% for vendor in vendors %}
-        {{ vendor }}
-    {% endfor %}
+<form action="/vendors/" method="post">
+    {% csrf_token %}
+    {{ form|bootstrap_horizontal:'col-lg-6' }}
+    <input type="submit" value="Submit" />
+</form>
+        {% if vendormenu %}
+            {% for item, desc in vendormenu.items %}
+                <p>{{item}}    {{desc}}</p>
+            {%endfor%}
+        {%endif%}
 {% endblock %}
+
+
