@@ -1,4 +1,5 @@
 import hashlib
+import copy
 
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
@@ -52,17 +53,40 @@ class UserRatings(FormView):
         user_rate.save()
         return {'status': status, 'message': message}
 
-    def get_context_data(self, **kwargs):
-        context = self.request.session.get('data', {})
-        return context
-
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
+
         data = self._save_info()
         self.request.session['data'] = data
         return super(UserRatings, self).form_valid(form)
 
-    def form_invalid(self, form):
+    def get_context_data(self, **kwargs):
+        context = super(UserRatings, self).get_context_data(**kwargs)
+        user_rating_dict = self._process_user_rating()
+        context.update(self.request.session.get('data', {}))
+        context['user_rating_dict'] = user_rating_dict
+        return context
 
-        return super(UserRatings, self).form_invalid(form)
+    def _process_user_rating(self):
+        """
+        Process User Rating
+        :return: user_rating_dict
+        """
+        user_rating_dict = {}
+        user_rating_inner_dict = {'rating_super_like': 0,
+                                  'rating_like': 0,
+                                  'rating_not_like': 0}
+        for vendor in Vendor.objects.all():
+            user_rating_dict[vendor.name] = copy.copy(user_rating_inner_dict)
+
+        for vendor in Vendor.objects.all():
+            for user_rating in UserRating.objects.all():
+                if user_rating.rating == '1':
+                    user_rating_dict[vendor.name]['rating_super_like'] += 1
+                elif user_rating.rating == '2':
+                    user_rating_dict[vendor.name]['rating_like'] += 1
+                elif user_rating.rating == '3':
+                    user_rating_dict[vendor.name]['rating_not_like'] += 1
+
+        return user_rating_dict
