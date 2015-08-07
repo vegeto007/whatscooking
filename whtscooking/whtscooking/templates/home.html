@@ -5,16 +5,33 @@
 
 
 {% block body %}
-<form action="/vendors/" method="post">
-    {% csrf_token %}
-    {{ form|bootstrap_horizontal:'col-lg-6' }}
-    <input type="submit" value="Submit" />
-</form>
-        {% if vendormenu %}
-            {% for item, desc in vendormenu.items %}
-                <p>{{item}}    {{desc}}</p>
-            {%endfor%}
-        {%endif%}
+    {% if vendor %}
+        <div class="col-lg-12 text-center">
+            <div class="alert alert-success">
+                Menus for the Vendor <strong>{{ vendor }}</strong>
+            </div>
+        </div>
+    {% endif %}
+    <div class="col-lg-8">
+            <form action="/vendors/" method="post">
+                {% csrf_token %}
+                {{ form|bootstrap_horizontal:'col-lg-2' }}
+                <div class="col-lg-4">
+                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                </div>
+            </form>
+    </div>
+    <div class="col-lg-12 text-center">
+        <div class="form-group col-lg-4"><strong>Items</strong></div>
+        <div class="form-group col-lg-4"><strong>Price(in INR)</strong></div>
+        <div class="form-group col-lg-4"><strong>Description</strong></div>
+
+        {% for item, desc in vendormenu.items %}
+            <div class="form-group col-lg-4"><u>{{item}}</u></div>
+            <div class="form-group col-lg-4">{{desc.1}}</div>
+            <div class="form-group col-lg-4">{{desc.0}}</div>
+        {%endfor%}
+    </div>
 {% endblock %}
 
 

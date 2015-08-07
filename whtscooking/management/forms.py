@@ -8,7 +8,10 @@ class FormUserRatings(forms.Form):
     rating = forms.ChoiceField(widget=forms.RadioSelect, choices=UserRating.rating_type)
 
 class VendorMenuForm(forms.Form):
-    vendor_id = forms.ChoiceField(choices=[(obj.id, obj.name) for obj in Vendor.objects.all()])
+    vchoices = [('', 'Select Vendor')]
+    for obj in Vendor.objects.all():
+        vchoices.append((obj.id, obj.name))
+    vendor_id = forms.ChoiceField(choices=vchoices)
 
     class Meta:
         model = VendorMenu
